@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "QMatrix.GUI",
+  "display": "standalone",
+  "name": "QMatrix.GUI",
+  "short_name": "QMatrix.GUI",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
