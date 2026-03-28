@@ -21,7 +21,7 @@ public partial class App : Application
     public IHost? Host { get; private set; }
 
     [SuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "Uno.Extensions APIs are used in a way that is safe for trimming in this template context.")]
-    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args)
             .Configure(host => host
@@ -95,7 +95,22 @@ public partial class App : Application
             // parameter
             rootFrame.Navigate(typeof(MainPage), args.Arguments);
         }
+        // 检测 QMatrix 核心程序是否已安装
+        await CheckQMatrixCoreAsync();
+
         // Ensure the current window is active
         MainWindow.Activate();
+    }
+
+    private async Task CheckQMatrixCoreAsync()
+    {
+        var adapterService = new QMatrixAdapterService();
+        if (await adapterService.CheckQMatrixCoreInstalledAsync())
+        {
+            // 显示适配窗口
+            var adapterWindow = new QMatrix.GUI.Views.AdapterWindow();
+            await adapterWindow.InitializeAsync();
+            adapterWindow.ShowDialog();
+        }
     }
 }

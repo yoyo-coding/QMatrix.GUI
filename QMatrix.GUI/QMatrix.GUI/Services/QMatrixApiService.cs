@@ -8,7 +8,7 @@ namespace QMatrix.GUI.Services;
 public class QMatrixApiService : IQMatrixApiService
 {
     private readonly HttpClient _httpClient;
-    private readonly string _baseUrl = "http://localhost:5000/api";
+    private readonly string _baseUrl = "http://localhost:5098/api";
 
     public QMatrixApiService(HttpClient httpClient)
     {
